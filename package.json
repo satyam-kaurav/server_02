@@ -1,0 +1,16 @@
+{
+  "name": "server_02",
+  "version": "1.0.0",
+  "description": "This is a test server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "dev": "nodemon --env-file=.env server.js"
+  },
+  "author": "satyam kaurav",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.6.0"
+  }
+}
