@@ -1,4 +1,7 @@
-// generate 2,176,782,336 starts from 000000
+const { redis_get, redis_set } = require("../configs/redis");
+
+const BASE_UID = "0000";
+
 function incr_str(str) {
   const arr = str.split("");
 
@@ -14,14 +17,28 @@ function incr_str(str) {
     }
     if (item === "Z") {
       arr[i] = "0";
-      continue;
+      if (i === 0) {
+        arr.unshift("0");
+      }
     }
   }
 
   return arr.join("");
 }
 
-const old_str = "000000";
-const new_str = incr_str(old_str);
+async function u_id() {
+  try {
+    let pre_value = await redis_get("u_id");
+    pre_value = pre_value || BASE_UID;
 
-console.log({ old_str, new_str });
+    const new_value = incr_str(pre_value);
+
+    await redis_set("u_id", new_value);
+
+    return new_value;
+  } catch (error) {
+    console.log("err", error);
+  }
+}
+
+module.exports = u_id;

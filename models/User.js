@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  user_tag: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true,
+  },
   image_key: {
     type: String,
     required: true,
