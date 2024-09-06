@@ -1,6 +1,6 @@
 const { redis_get, redis_set } = require("../configs/redis");
 
-const BASE_UID = "0000";
+const BASE_UID = "000000";
 
 function incr_str(str) {
   const arr = str.split("");
